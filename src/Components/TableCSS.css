@@ -1,0 +1,37 @@
+.Header th{
+    color: #344054;
+}
+.Main td,th{
+    color: #344054;
+    background-color: white;
+}
+.ViewSection th{
+    color: #8B8D97;
+}
+.icons{
+    text-align: center;
+}
+.icon1 {
+    color: #56BCA0;
+}
+.icon2 {
+    color: #CD194C;
+}
+.icon3 {
+    color: #8B8D97;
+    background-color: #E9E9E9;
+}
+.Title th{
+    background-color:#344054 ;
+    color: white;
+}
+.searchbox {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
