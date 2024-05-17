@@ -2,57 +2,57 @@ import React, { Component } from 'react';
 import './TableCSS.css';
 import Popup from './popup.js';
 import { ButtonCheck, ButtonCross, ButtonDots } from './btn.jsx';
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
 
-function generateSampleRequests(numRequests) {
-  return Array.from({ length: numRequests }, () => {
-    const id = faker.number.int({ min: 1, max: 10000 });
-    const priority = faker.helpers.arrayElement(['High', 'Medium', 'Low']);
-    const group = faker.company.name();
-    const product = faker.commerce.productName();
-    const variants = Array.from({ length: 3 }, () => ({
-      concentration: faker.number.int({ min: 1, max: 100 }) + '%',
-      flavour: faker.commerce.productAdjective(),
-      weight: faker.number.int({ min: 1000, max: 5000 }) + 'g',
-      squirrels: faker.number.int({ min: 50, max: 100 }) + 'g'
-    }));
-    const address = faker.location.streetAddress();
-    const createdOn = faker.date.past().toLocaleDateString();
-    const deadline = faker.date.future().toLocaleDateString();
-    const assignedTo = faker.number.int({ min: 1, max: 10000 });
-    const deliveryTo = faker.location.city() + ', ' + faker.location.state();
-    const receiver = faker.company.name();
-    const sampleSize = faker.number.int({ min: 1, max: 5 }) + ' jars';
-    const application = faker.lorem.words();
-    const additionalInfo = faker.lorem.sentence();
-    const documents = Array.from({ length: 2 }, () => ({
-      name: faker.system.fileName(),
-      status: faker.helpers.arrayElement(['ok', 'pending', 'rejected'])
-    }));
+// function generateSampleRequests(numRequests) {
+//   return Array.from({ length: numRequests }, () => {
+//     const id = faker.number.int({ min: 1, max: 10000 });
+//     const priority = faker.helpers.arrayElement(['High', 'Medium', 'Low']);
+//     const group = faker.company.name();
+//     const product = faker.commerce.productName();
+//     const variants = Array.from({ length: 3 }, () => ({
+//       concentration: faker.number.int({ min: 1, max: 100 }) + '%',
+//       flavour: faker.commerce.productAdjective(),
+//       weight: faker.number.int({ min: 1000, max: 5000 }) + 'g',
+//       squirrels: faker.number.int({ min: 50, max: 100 }) + 'g'
+//     }));
+//     const address = faker.location.streetAddress();
+//     const createdOn = faker.date.past().toLocaleDateString();
+//     const deadline = faker.date.future().toLocaleDateString();
+//     const assignedTo = faker.number.int({ min: 1, max: 10000 });
+//     const deliveryTo = faker.location.city() + ', ' + faker.location.state();
+//     const receiver = faker.company.name();
+//     const sampleSize = faker.number.int({ min: 1, max: 5 }) + ' jars';
+//     const application = faker.lorem.words();
+//     const additionalInfo = faker.lorem.sentence();
+//     const documents = Array.from({ length: 2 }, () => ({
+//       name: faker.system.fileName(),
+//       status: faker.helpers.arrayElement(['ok', 'pending', 'rejected'])
+//     }));
 
-    return {
-      id,
-      priority,
-      group,
-      product,
-      variants,
-      address,
-      createdOn,
-      deadline,
-      assignedTo,
-      deliveryTo,
-      receiver,
-      sampleSize,
-      application,
-      additionalInfo,
-      documents
-    };
-  });
-}
+//     return {
+//       id,
+//       priority,
+//       group,
+//       product,
+//       variants,
+//       address,
+//       createdOn,
+//       deadline,
+//       assignedTo,
+//       deliveryTo,
+//       receiver,
+//       sampleSize,
+//       application,
+//       additionalInfo,
+//       documents
+//     };
+//   });
+// }
 
 const initialData = [
   {
-    id: '101',
+    id: 101,
     priority: 'High',
     group: 'BIGYAY',
     products: [
@@ -80,7 +80,7 @@ const initialData = [
     ],
   },
   {
-    id: '102',
+    id: 102,
     priority: 'High',
     group: 'VitaPlus',
     products: [
@@ -120,7 +120,7 @@ const initialData = [
     ],
   },
   {
-    id: '103',
+    id: 103,
     priority: 'High',
     group: 'BIGYAY',
     products: [
@@ -152,7 +152,7 @@ const initialData = [
     ],
   },
   {
-    id: '104',
+    id: 104,
     priority: 'High',
     group: 'BIGYAY',
     products: [
@@ -178,7 +178,7 @@ const initialData = [
     ],
   },
   {
-    id: '105',
+    id: 105,
     priority: 'High',
     group: 'BIGYAY',
     products: [
@@ -204,8 +204,8 @@ const initialData = [
     ],
   },
   {
-    id: '106',
-    priority: 'High',
+    id: 106,
+    priority: 'Low',
     group: 'BIGYAY',
     products: [
       {
@@ -230,7 +230,7 @@ const initialData = [
     ],
   },
   {
-    id: '107',
+    id: 107,
     priority: 'Low',
     group: 'COSMETICS',
     products: [
@@ -256,7 +256,7 @@ const initialData = [
     ],
   },
   {
-    id: '108',
+    id: 108,
     priority: 'High',
     group: 'SNACKS',
     products: [
@@ -302,11 +302,6 @@ export default class Table extends Component {
   componentDidMount() {
     document.body.addEventListener('click', this.handleBodyClick);
     window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    document.body.removeEventListener('click', this.handleBodyClick);
-    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll = () => {
@@ -360,8 +355,9 @@ export default class Table extends Component {
     this.setState({ searchQuery: event.target.value });
   };
 
+  //this is used to sort the table by using "<>""
   handleSort = (column) => {
-    const { data, sortDirection, sortColumn } = this.state;
+    const { sortDirection, sortColumn } = this.state;
     let newSortDirection = 'asc';
 
     let sortedData = [...initialData];
@@ -371,11 +367,8 @@ export default class Table extends Component {
     }
 
     sortedData.sort((a, b) => {
-      let aValue = a[column];
-      let bValue = b[column];
-
-      if (aValue < bValue) return newSortDirection === 'asc' ? -1 : 1;
-      if (aValue > bValue) return newSortDirection === 'asc' ? 1 : -1;
+      if (a[column] < b[column]) return newSortDirection === 'asc' ? -1 : 1;
+      if (a[column] > b[column]) return newSortDirection === 'asc' ? 1 : -1;
       return 0;
     });
 
